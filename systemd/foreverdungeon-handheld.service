@@ -1,0 +1,27 @@
+# Standalone service (simulator/headless or future GPIO-attached drivers).
+# NOT used on the LAFVIN 2.13" + PiPanel device: there PiPanel launches displays/pipanel.py itself.
+[Unit]
+Description=Forever Dungeon e-paper handheld client
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=simple
+User=foreverdungeon
+Group=foreverdungeon
+SupplementaryGroups=gpio spi
+StateDirectory=foreverdungeon-handheld
+StateDirectoryMode=0700
+ExecStart=/opt/foreverdungeon-handheld/venv/bin/foreverdungeon-handheld --config /etc/foreverdungeon-handheld.toml
+Restart=on-failure
+RestartSec=5
+StartLimitIntervalSec=300
+StartLimitBurst=10
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/foreverdungeon-handheld
+
+[Install]
+WantedBy=multi-user.target

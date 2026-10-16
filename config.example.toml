@@ -1,0 +1,34 @@
+# Copy to /etc/foreverdungeon-handheld.toml. Never put a device token here:
+# it lives in cache.token_path (0600), written after pairing.
+# Any non-secret key can be overridden with FDH_<SECTION>_<KEY>, e.g. FDH_DISPLAY_WIDTH=296.
+
+[server]
+base_url = "https://foreverdungeon.moonshinelabs.io"
+timeout_seconds = 25
+state_poll_seconds = 30
+device_name = "E-paper handheld"
+
+[display]
+driver = "simulator"      # simulator | headless  (the physical 2.13" panel runs via PiPanel)
+width = 400
+height = 300
+rotation = 0
+partial_refresh = true
+full_refresh_every = 8
+min_partial_seconds = 1.5
+min_full_seconds = 8
+scale = 2                 # simulator zoom
+
+[input]
+driver = "keyboard"
+text_entry = true
+debounce_ms = 40
+long_press_ms = 700
+active_low = true
+pull_up = true
+# pins = { UP = 5, DOWN = 6, SELECT = 13, BACK = 19 }   # gpiozero numbering; untested on hardware
+
+[cache]
+path = "/var/lib/foreverdungeon-handheld/state.json"
+token_path = "/var/lib/foreverdungeon-handheld/device-token"
+max_recent_events = 30

@@ -1,0 +1,25 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "foreverdungeon-handheld"
+version = "0.1.0"
+description = "Thin e-paper handheld client for Forever Dungeon (server is authoritative)"
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.11"
+dependencies = ["Pillow>=9.5"]
+
+[project.optional-dependencies]
+gpio = ["gpiozero>=2.0"]
+test = ["pytest>=7"]
+
+[project.scripts]
+foreverdungeon-handheld = "foreverdungeon_handheld.__main__:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
